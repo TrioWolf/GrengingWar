@@ -5,8 +5,8 @@ import React from "react";
 const GWplayertag = props => {
     return(
         <div style={styles.btn}>
-            <div>{props.name}</div> 
-            <div>{ props.type}</div>
+            <div style={styles.name}>{props.name}</div> 
+            <div style={styles.type} >{ props.type}</div>
             <div style={styles.health}>{props.health}</div>
         </div>
     );
@@ -26,7 +26,7 @@ const styles={
         // marginLeft:'15px',
         fontSize: '14px',
         width: '100px',
-        height:'50px',
+        height:'75px',
         
     },
     health: {
@@ -36,7 +36,16 @@ const styles={
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        top:'8px'
+        height:'15px',
+        top:'8px',
 
     },
+    name: {
+        fontSize: '12px',
+        position: 'relative',
+        top: '0px'
+    },
+    type: {
+        fontSize: "8px",
+    }
 };

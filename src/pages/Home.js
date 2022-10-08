@@ -869,7 +869,7 @@ function Home() {
                                     />
                         </div>
                         <div id='player' style={styles.resources}> 
-                            {/* resources/npcs  */}
+                            {/* resources/players  */}
                             <GWplayertag health='10' type='type: player' name="Kittien"/>
                         </div>
                         <div id='resources' style={styles.resources}> 
