@@ -1,4 +1,10 @@
-
+export const player = [
+    {
+        name: 'kittien',
+        health: 50,
+        type: "player"
+    }
+]
 
 export const NPCDATA= [
         {
@@ -46,6 +52,7 @@ export const NPCDATA= [
             }
         },
 ];
+export const spawn0 = []
 export const spawn44 = [
     {
         id: 1,
@@ -54,8 +61,8 @@ export const spawn44 = [
         type: "plant",
         loot1: {
             food: 1,
-            credit: 1,
-            message: 'Looted Food: 1, Credit: 1'
+            credit: 0,
+            message: 'Looted Food: 1'
         }
     },
 ]
@@ -64,6 +71,19 @@ export const spawn34 = [
         id: 0,
         health: 50,
         name: "Rabit",
+        type: "animal",
+        loot1: {
+            food: 1,
+            credit: 2,
+            message: `looted food: 1, Credit: 2`
+        }
+    },
+]
+export const spawn45 = [
+    {
+        id: 0,
+        health: 25,
+        name: "rat",
         type: "animal",
         loot1: {
             food: 1,
