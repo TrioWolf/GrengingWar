@@ -3,7 +3,7 @@
 export const NPCDATA= [
         {
             id: 0,
-            health: 50,
+            health: 1000,
             name: "Rabit",
             type: "animal",
             loot1: {
@@ -62,9 +62,10 @@ export const spawn44 = [
 export const spawn34 = [
     {
         id: 0,
-        health: 50,
+        health: 100,
         name: "Rabit",
         type: "animal",
+        respawn: 5,
         loot1: {
             food: 1,
             credit: 2,

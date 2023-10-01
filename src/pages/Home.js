@@ -568,7 +568,8 @@ function Home() {
     const [gwb, setgwb] = useState(10);
     const [seconds, setSeconds] = useState(0);
     const [atk, setatk] = useState(false);
-    const [currentnpc, setcurrentnpc] = useState(0)
+    const [currentnpc, setcurrentnpc] = useState(0);
+    const [startingsector, setstartingsector] = useState(true)
 
     //--------- attack function --------------------   
     const attack = (item) => {
@@ -603,9 +604,10 @@ function Home() {
     function startsector() {
         const start = document.getElementById("home/4/4");
         const starting = start.style.backgroundColor;
-        if (starting === 'aqua') {
+        if (startingsector === true) {
             start.style.backgroundColor = 'yellow'
-        }
+            setstartingsector(false);
+        }else return 
     }
     // ------- timer code for attacking -------------------
 
@@ -627,14 +629,14 @@ function Home() {
         let interval = null;
         if (atk) {
             interval = setInterval(() => {
-                setSeconds(seconds => seconds - 1);
-            }, 1000);
+                setSeconds(seconds => seconds - .1);
+            }, 100);
         } else if (!atk && seconds !== 0) {
             clearInterval(interval);
-        } if (atk && seconds === 0) {
-            setSeconds(3)
+        } if (atk && seconds < 0) {
+            setSeconds(1.5)
             const npcid = data[currentnpc].id
-            const hpdmg = data[currentnpc].health - rng(50, 50)
+            const hpdmg = data[currentnpc].health - rng(10, 20)
             const lootfood = data[currentnpc].loot1.food
             const lootcredit = data[currentnpc].loot1.credit
             const lootdisplay = NPCDATA[currentnpc].loot1.message
@@ -765,7 +767,7 @@ function Home() {
         interval = setInterval(() => {
             setSeconds(seconds => seconds - 1);
         }, 1000);
-        if (!atk && seconds === 0) {
+        if (!atk && seconds < 0) {
             setSeconds(0)
             clearInterval(interval)
         }
@@ -870,7 +872,7 @@ function Home() {
                         </div>
                         <div id='player' style={styles.resources}> 
                             {/* resources/npcs  */}
-                            <GWplayertag health='10' type='type: player' name="Kittien"/>
+                            <GWplayertag health='2000' type='type: player' name="Kittien"/>
                         </div>
                         <div id='resources' style={styles.resources}> 
                             {/* resources/npcs  */}
