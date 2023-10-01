@@ -26,7 +26,7 @@ const styles={
         // marginLeft:'15px',
         fontSize: '14px',
         width: '100px',
-        height: '50px',
+        // height: '75px',
         cursor: 'pointer',
         
     },
@@ -37,7 +37,9 @@ const styles={
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        top:'8px'
+        bottom: '0px',
+        margin: '0px',
+        height: '15px'
 
     },
 };

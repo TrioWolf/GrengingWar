@@ -1,5 +1,5 @@
 // import React from 'react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 import GWNav from "../components/GWNav"
 import GWheader from "../components/GWheader"
 import GWinventory from "../components/inventory/GWinventory";
@@ -15,7 +15,7 @@ import NPC from "../components/gathering/NPC"
 //utils 
 import { Direction8, Direction3, Direction5 } from '../Utils/Utilsmap';
 import Timer from '../Utils/Tick';
-import { NPCDATA, spawn34, spawn44 } from "../datafiles/NPC";
+import { NPCDATA, spawn34, spawn44, spawn45, player } from "../datafiles/NPC";
 
 function Home() {
     
@@ -205,8 +205,8 @@ function Home() {
             const home43 = document.getElementById("home/4/3");
             const home44 = document.getElementById("home/4/4");
             const home45 = document.getElementById("home/4/5");
-            Direction8(home24, home25, home35, home45, home44, home43, home33, home23, sectorid)
             setdata(spawn34)
+            Direction8(home24, home25, home35, home45, home44, home43, home33, home23, sectorid)
             
         };
         function sectorclicked35() {
@@ -287,6 +287,7 @@ function Home() {
             const home54 = document.getElementById("home/5/4");
             const home55 = document.getElementById("home/5/5");
             Direction8(home34, home35, home45, home55, home54, home53, home43, home33, sectorid)
+            setdata(spawn44)
         };
         function sectorclicked45() {
             const sectorid = document.getElementById("home/4/5");
@@ -300,7 +301,7 @@ function Home() {
             const home56 = document.getElementById("home/5/6");
             Direction8(home35, home36, home46, home56, home55, home54, home44, home34, sectorid)
             //    add tree to this sector 
-            // Spawn()
+            setdata(spawn45)
         };
         function sectorclicked46() {
             const sectorid = document.getElementById("home/4/6");
@@ -550,8 +551,44 @@ function Home() {
     }
     // ----------- spawn code ---------------------
  
-    const [data, setdata] = useState(spawn44)
+    const [data, setdata] = useState([])
+    // const [sectordata, setsectordata] = useState()
     
+
+    const randomspawn = useCallback(() => {
+        
+        const spawns = NPCDATA
+        let spawn1 = null
+        let spawn2 = null
+        let spawn3 = null
+        let spawn4 = null
+        let roll = null
+        // console.log("data 0",data)
+        
+        if (data.length < 1) {
+            spawn1 = [spawns[rng(0, 3)]]
+            spawn2 = [spawns[rng(0, 3)], spawns[rng(0,3)],]
+            spawn3 = [spawns[rng(0, 3)], spawns[rng(0,3)], spawns[rng(0,3)],]
+            spawn4 = [spawns[rng(0, 3)], spawns[rng(0,3)], spawns[rng(0,3)], spawns[rng(0,3)],]
+            // const newspawn = [...data, {test}]
+            roll = rng(1, 4)
+            if (roll === 1) {
+                setdata(spawn1)
+            } if (roll === 2) {
+                setdata(spawn2)
+            } if (roll === 3) {
+                setdata(spawn3)
+            } if (roll === 4) {
+                setdata(spawn4)
+            }
+            // setdata(rollpick[roll])
+            // setspawnatk(true)
+        }
+        // console.log("data 1", data)
+        // console.log("test rng ", test)
+        // console.log('spawnatk', spawnatk)
+    },[data])
+
 
     function spawns(name) {
         const newspawns = [...data, { name }];
@@ -568,8 +605,12 @@ function Home() {
     const [gwb, setgwb] = useState(10);
     const [seconds, setSeconds] = useState(0);
     const [atk, setatk] = useState(false);
-    const [currentnpc, setcurrentnpc] = useState(0);
     const [startingsector, setstartingsector] = useState(true)
+    const [currentnpc, setcurrentnpc] = useState(0)
+    // ---- spawn variables --- start 
+    // const [spawnseconds, setSpawnSeconds] = useState(0);
+    // const [spawnatk, setspawnatk] = useState(false);
+    // --- spawn variables ---- end 
 
     //--------- attack function --------------------   
     const attack = (item) => {
@@ -599,7 +640,6 @@ function Home() {
         }
                     
     };
-                
     // -------------- starting sector ---------------------
     function startsector() {
         const start = document.getElementById("home/4/4");
@@ -618,13 +658,23 @@ function Home() {
         // console.log(reload)
     }
 
-
+// ------- player information --------
+    const [user] = useState(player)
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
+        // --- spawn --- start
+        if (data.length === 0) {
+            
+            randomspawn()
+        }
+        // ----spawn ---- end 
         // ---------- starting sector color sector ---------
-        startsector()
-        // attack()
+        if (startdata === false) {
+            document.getElementById("home/4/4").style.backgroundColor = 'yellow'
+            setstartdata(true)
+            return
+        }
         //--------timer block of code ----------
         let interval = null;
         if (atk) {
@@ -656,7 +706,7 @@ function Home() {
                     setfood(lootfood + food)
                     setcredit(lootcredit + credit)
                     const spawn = [...data.slice(1)];
-                    console.log(spawn)
+                    // console.log(spawn)
                     setdata(spawn)
                     clearInterval(interval)
                     if (atk === true) {
@@ -664,6 +714,7 @@ function Home() {
                     }
                     return spawn;
                 };
+                
             }
             // ---------------- item 2 in list mechanics to despawn --------------
             if (currentnpc === 1) {
@@ -684,7 +735,7 @@ function Home() {
                         }
                         return false;
                     });
-                    console.log(spawn)
+                    // console.log(spawn)
                     setdata(spawn)
                     clearInterval(interval)
                     if (atk === true) {
@@ -712,7 +763,7 @@ function Home() {
                         }
                         return false;
                     });
-                    console.log(spawn)
+                    // console.log(spawn)
                     setdata(spawn)
                     clearInterval(interval)
                     if (atk === true) {
@@ -754,14 +805,87 @@ function Home() {
                 console.log(id3)
             };
         }
+
+
+// ---------- spawn timer ---------- start
+
+
         // const npc1 = NPCDATA[0]
-        const length = data.length
-        if (length === 0) {
-                setdata(spawn44)
-            console.log(data)
-            }
-    //    } 
+        // const length = data.length
+        // let time = null;
+        // if (!spawnatk && data.length === 0 ) {
+        //     time = setInterval(() => {
+        //         setSpawnSeconds(spawnseconds => spawnseconds - 1);
+        //     }, 1000);
+        //     // setSpawnSeconds(10)
+        //     // setspawnatk(true)
+            
+        //     console.log('1 triggered length ', data.length)
+        //     console.log("1 spawnatk",spawnatk)
+        //     console.log("1 spawn time ",spawnseconds)
+        // }
+        // else if (!spawnatk && spawnseconds !== 0) {
+        //     clearInterval(time);
+        //     console.log("2 trigger = false")
+        // }
         
+            // if (spawnseconds !== 0 && !spawnatk) {
+            //     // randomspawn()
+            //     // setSpawnSeconds(10)
+            //     const spawns = NPCDATA
+            //     let test = null
+            //     console.log("data 0",data)
+        
+            //     test = [spawns[rng(0, 3)]]
+            //     // const newspawn = [...data, test]
+            //     setdata(test)
+            //     setspawnatk(true)
+            //     // setSpawnSeconds(10)
+            //     if (spawnatk === true) {
+                    
+            //         clearInterval(time)
+            //     }
+    
+            //     console.log("2 spawned and cleared interval", data)
+            //     console.log("2 test", test)
+            //     console.log("2 spawnatk", spawnatk)
+            // }
+        // if (spawnatk) {
+        //     interval = setInterval(() => {
+        //         setSpawnSeconds(spawnseconds => spawnseconds - 1);
+        //     }, 1000);
+        //     if (!spawnatk && spawnseconds !== 0) {
+        //         setSeconds(0)
+        //         clearInterval(interval)
+        //     }
+        // }
+
+        // if (spawnatk === false) {
+        //     // setspawnatk(true)
+        //         console.log("spawnatk",spawnatk)
+        //     }else return console.log("live testing spawnatk", spawnatk)
+
+        // if (!spawnatk  && spawnseconds === 0) {
+        //     randomspawn()
+        //     // setSpawnSeconds(10)
+        //     clearInterval(time)
+        //     console.log("3 spawn timer", spawnseconds)
+        //     setspawnatk(true)
+        //     console.log("3 spawn atk", spawnatk)
+        //     }
+            
+                // setdata(data)
+            // console.log(data)
+            
+    //    if (spawnseconds !== 0 && spawnatk === true ) {
+    //     clearInterval(interval);     
+    //     // setSpawnSeconds(0)
+    //             console.log('4 stop respawn timer')
+    //         } 
+
+    
+  // -------- spawn timer ---------- end       
+    
     
     if (!atk) {
         interval = setInterval(() => {
@@ -773,7 +897,7 @@ function Home() {
         }
     }
     return () => clearInterval(interval);
-}, [atk, seconds,credit, currentnpc, data, food]);
+}, [atk, credit, currentnpc, data, food,  seconds, startdata]);
   
 
     return (
@@ -891,7 +1015,8 @@ function Home() {
                                     seconds={seconds}
                                 />
                             ))}
-                            
+                            {/* spawn timer code to see the timer count  */}
+                            {/* <div style={styles.spawntimer}>{spawnseconds} </div> */}
                         </div>
                     </div>
                 </div>    
@@ -913,6 +1038,9 @@ function Home() {
 export default Home;
 
 const styles = {
+    spawntimer: {
+        color:'red'
+    },
     container: {
         display: 'flex',
         flexDirection:'column',
