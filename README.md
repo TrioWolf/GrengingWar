@@ -1,50 +1,99 @@
-# Grenging War
-
-## About
-
-This is a small time strategy game in the middle of being made. This game is about recreating a game I love to play yet the dev for it has basically abandoned the game. So I am creating a replica of the game in a way. Though with this I intend to add more content and develop it way more then the game this is heavily bassed off of. 
-
-## Development
-
-### Notes
-- this is being figured out on the spot. No pre plan or design in mind.
-- I am typically a solo Dev though I am trying to bring in other devs into the project
-- I am building the structure of this development for what works for me. 
-- If you are lucky enough to read this never feel shy about talking to me about changing a format or ask why I have chosen the way I have.
 
 
-### Development Directions
-- npc spawn system 
-- res gathing system 
-- crafting system 
-- movement system (map and actual movement)
-- attacking system 
-- defencive system 
-- chat system (late development)
-- gear and item creation (building the armada of gear stats and all that fun stuff)
-
-### Development Directions NOTES
-- some things have been worked on a bit others have not been worked on at all 
-
-### Task Notes 
-- Logging the notes in a "change log" file 
-- If you are a new dev to the team use the format below to create you a "change log/ task achievement log" 
+# Project & Portfolio IV
+### Selena Hebert 
 
 
-# NAME 
+![Degree Program](https://img.shields.io/badge/degree-web%20development-blue.svg)
 
-## Code Language Details Below 
-- html 
-- js 
+[Log](./docs/log.md)
 
-## Task 
+[Main project ReadMe.md](GrengingWar/README.md)
 
-### 11-11-11 current date 
-- seperate details of all the stuff you did 
-- like this on seperate bullets.
-- SO it can easily be read through by other devs
+# Project Name
+> Outline a brief description of your project.
+> Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
 
-## Ideas
+## Table of Contents
+* [General Info](#general-information)
+* [Technologies Used](#technologies-used)
+* [Features](#features)
+* [Usage](#usage)
+* [Project Status](#project-status)
+* [Room for Improvement](#room-for-improvement)
+* [Acknowledgements](#acknowledgements)
+* [Contact](#contact)
+<!-- * [License](#license) -->
 
-### Label Idea 
-break it down as organized as possible So other devs might pick up and work on the idea 
+
+## General Information
+- Provide general information about your project here.
+<p>
+This is a mmorpg, stratagy, realtime, and indie style game. It is going to give you the ability to enjoy playing a game and chill with friends while taking down tons of bosses and NPC's. It is intended to be a place for people to come together with people they already know and make new friends and bonds with people from around the world.
+</p>
+- What problem does it (intend to) solve?
+<p>
+This project is a personal project that I started out of frustation with a game that I love to play. The Developer stoped enhancing the game. So, this is my version of that with my own personal touch.
+</p>
+- What is the purpose of your project?
+<p>
+To give my self something fun to play and fellow gamers from the game this was originally inspired by.
+</p>
+- Why did you undertake it?
+<p>
+The reason I have undertaken this project is to be able to make a quality product in the gaming industry with a developer that will take care of and grow. 
+</p>
+
+
+## Technologies Used
+- ReactJS - version "^18.0.0"
+- NodeJS - version 18.17.0
+- MongoDB - version "^5.1.0"
+- Express - version "^4.18.1"
+
+
+## Features
+List the ready features here:
+- Combat 
+- Gathering - Mining - Woodcutting - Foraging
+- Crafting - Gear - Tools - Weapons
+
+
+## Usage
+How does one go about using it?
+
+This will be a client that will be hosted. (undefined on location of hosting)
+
+
+## Project Status
+Project is: _in progress_ _beta development_
+
+
+## Room for Improvement
+
+Room for improvement:
+- Crafting format
+- Gear structure and format for combat
+- Gathering format and structure
+
+To do:
+- Build out the combat structure and architecture
+- Build out the resource structure and architecture
+- Build out the inventory structure and architecture
+
+Future freatures:
+- Buildings you can interact with and construct on the map
+- additional factions and gear
+- Bank
+- Clan/Corps/Alliance
+- Chat
+
+
+## Acknowledgements
+Give credit here.
+- This project was inspired by The Infinite black made by:spellbook and RuneScape made by jagex
+
+
+## Contact
+Created by Selena Hebert - feel free to contact me at wolfselen0962@gmail.com
+
